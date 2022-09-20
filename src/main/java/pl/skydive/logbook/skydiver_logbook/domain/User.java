@@ -4,32 +4,43 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
+@Builder
+@AllArgsConstructor
 @Entity
-@Table(name = "users")
+@Table(name = "USERS")
 public class User {
 
     { accountCreated = LocalDateTime.now(); }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "user_id")
+    @Column(name = "USER_ID")
     private Long id;
 
-    @Column(name = "firstname")
+    @NonNull
+    @Column(name = "FIRSTNAME", length = 30)
     private String firstName;
 
-    @Column(name = "lastname")
+    @NonNull
+    @Column(name = "LASTNAME", length = 30)
     private String lastName;
 
-    @Column(name = "login")
-    private String login;
+    @NonNull
+    @Column(name = "LOGIN", nullable = false)
+    private String emailAsLogin;
 
-    @Column(name = "account_created")
+    @Column(name = "ACCOUNT_CREATED")
     private LocalDateTime accountCreated;
+
+    @Column(name = "LOGGED_SKYDIVES")
+    @OneToMany(fetch = FetchType.LAZY)
+    @ToString.Exclude
+    private List<JumpLog> loggedSkydives;
 
 }

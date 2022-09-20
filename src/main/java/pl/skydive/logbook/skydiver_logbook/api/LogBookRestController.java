@@ -14,10 +14,16 @@ import pl.skydive.logbook.skydiver_logbook.service.UserService;
 public class LogBookRestController {
     private UserService userService;
 
-    @GetMapping
+    @GetMapping("/welcome/{name}") //URL/welcome/name
     @ResponseBody
-    String welcomeSomeone(){
-        return "welcome here";
+    ResponseEntity<String> welcomeSomeoneViaPathVariable(@PathVariable String name){
+        return new ResponseEntity<>("Welcome here, " + name, HttpStatus.OK);
+    }
+
+    @GetMapping("/welcome/")
+    @ResponseBody
+    ResponseEntity<String> welcomeSomeoneViaRequestParam(){
+        return new ResponseEntity<>("Welcome here, ", HttpStatus.OK);
     }
 
     @GetMapping("/getUser")
