@@ -1,10 +1,12 @@
 package pl.skydive.logbook.skydiver_logbook.service;
 
+import org.springframework.stereotype.Service;
 import pl.skydive.logbook.skydiver_logbook.domain.User;
 import pl.skydive.logbook.skydiver_logbook.infrastructure.UserRepository;
 
 import java.util.regex.Pattern;
 
+@Service
 public class UserService {
 
     private final UserRepository userRepository;

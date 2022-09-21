@@ -11,7 +11,6 @@ import java.util.List;
 @Setter
 @ToString
 @Builder
-@AllArgsConstructor
 @Entity
 @Table(name = "USERS")
 public class User {
@@ -32,7 +31,7 @@ public class User {
     private String lastName;
 
     @NonNull
-    @Column(name = "LOGIN", nullable = false)
+    @Column(name = "LOGIN", unique = true, updatable = false, length = 100) //nullable = false
     private String emailAsLogin;
 
     @Column(name = "ACCOUNT_CREATED")
@@ -43,4 +42,13 @@ public class User {
     @ToString.Exclude
     private List<JumpLog> loggedSkydives;
 
+    public User(Long id, @NonNull String firstName, @NonNull String lastName,
+                @NonNull String emailAsLogin, LocalDateTime accountCreated, List<JumpLog> loggedSkydives) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.emailAsLogin = emailAsLogin;
+        this.accountCreated = accountCreated;
+        this.loggedSkydives = loggedSkydives;
+    }
 }
