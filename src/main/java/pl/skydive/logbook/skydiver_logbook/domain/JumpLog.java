@@ -31,7 +31,7 @@ public class JumpLog {
     private String dropZone;
 
     @Column(name="AIRCRAFT")
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private Aircraft aircraft;
 
     @Column(name="EQUIPMENT")

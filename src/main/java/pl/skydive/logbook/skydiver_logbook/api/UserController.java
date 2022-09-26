@@ -21,8 +21,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    private static int counter = 0;
-
     @GetMapping("/welcome/{name}") //URL/welcome/name
     @ResponseBody
     ResponseEntity<String> welcomeSomeoneViaPathVariable(@PathVariable String name){
@@ -35,9 +33,9 @@ public class UserController {
         return new ResponseEntity<>("Welcome here, ", HttpStatus.OK);
     }
 
-    @GetMapping("/getuser")
+    @GetMapping("getuserbylogin/{email}")
     @ResponseBody
-    public ResponseEntity<UserDto> getUserByLogin(@RequestParam String email) throws UserNotExistsException {//@PathVariable("id") Long id){
+    public ResponseEntity<UserDto> getUserByLoginPath(@PathVariable String email) throws UserNotExistsException {
         return new ResponseEntity<>(userService.getUserByLogin(email), HttpStatus.OK);
     }
 
@@ -53,5 +51,4 @@ public class UserController {
         userService.createUser(userDto);
         System.out.println("created new user");
     }
-
 }

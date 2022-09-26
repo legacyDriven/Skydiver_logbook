@@ -13,7 +13,7 @@ public class UserDaoImpl implements UserDao {
         userRepository.save(User.builder()
                 .firstName(userDto.getFirstName())
                 .lastName(userDto.getLastName())
-                .emailAsLogin(userDto.getEmail())
+                .emailAsLogin(userDto.getEmailAsLogin())
                 .build());
     }
 
