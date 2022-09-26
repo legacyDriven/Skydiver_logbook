@@ -3,14 +3,17 @@ package pl.skydive.logbook.skydiver_logbook.domain;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Value;
+import lombok.ToString;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 @Entity
 @Table(name = "JUMPLOG")
 public class JumpLog {
@@ -39,4 +42,17 @@ public class JumpLog {
 
     @Column(name="DESCRIPTION")
     String description;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        JumpLog jumpLog = (JumpLog) o;
+        return jumpId != null && Objects.equals(jumpId, jumpLog.jumpId);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

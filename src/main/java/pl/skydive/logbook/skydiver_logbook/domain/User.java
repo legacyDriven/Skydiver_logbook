@@ -1,10 +1,12 @@
 package pl.skydive.logbook.skydiver_logbook.domain;
 
 import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @NoArgsConstructor
 @Getter
@@ -14,8 +16,6 @@ import java.util.List;
 @Entity
 @Table(name = "USERS")
 public class User {
-
-    { accountCreated = LocalDateTime.now(); }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -38,7 +38,7 @@ public class User {
     private LocalDateTime accountCreated;
 
     @Column(name = "LOGGED_SKYDIVES")
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.EAGER)//check error logs for lazy fetchtype
     @ToString.Exclude
     private List<JumpLog> loggedSkydives;
 
@@ -50,5 +50,20 @@ public class User {
         this.emailAsLogin = emailAsLogin;
         this.accountCreated = accountCreated;
         this.loggedSkydives = loggedSkydives;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id) && firstName.equals(user.firstName) && lastName.equals(user.lastName)
+                && emailAsLogin.equals(user.emailAsLogin) && Objects.equals(accountCreated, user.accountCreated)
+                && Objects.equals(loggedSkydives, user.loggedSkydives);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName, emailAsLogin, accountCreated, loggedSkydives);
     }
 }

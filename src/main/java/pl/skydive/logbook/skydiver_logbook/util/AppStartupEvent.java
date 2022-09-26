@@ -17,12 +17,12 @@ public class AppStartupEvent implements ApplicationListener<ApplicationReadyEven
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
-//        User user = new User();
-//        user.setFirstName("EugeniuszImie");
-//        user.setLastName("sniezkonazwisko");
-//        user.setEmailAsLogin("twojastara@gmail.com");
-//        this.userRepository.save(user);
-//        Iterable<User> users = this.userRepository.findAll();
-//        users.forEach(System.out::println);
+        User user = new User();
+        user.setFirstName("EugeniuszImie");
+        user.setLastName("sniezkonazwisko");
+        user.setEmailAsLogin("twojastara@gmail.com");
+        this.userRepository.save(user);
+        Iterable<User> users = this.userRepository.findAll();
+        users.forEach(System.out::println);
     }
 }
